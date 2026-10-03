@@ -1,11 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Music studio, shop and art installations" />
-  <title>EXOTIKAP STUDIO RECORDS — Home</title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music & Releases | Exotikap Studio Records</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     :root {
       --bg-img: url('images/bg-abstract.jpg');
@@ -66,7 +65,7 @@
       align-items: center;
       justify-content: space-between;
     }
-    .brand {
+    .logo {
       display: flex;
       align-items: center;
       gap: .6rem;
@@ -75,8 +74,6 @@
       font-weight: 700;
       font-size: 1.05rem;
     }
-    .brand .logo { height: 36px; width: auto; }
-    .brand-text { display: inline-block; }
 
     /* Nav */
     .site-nav {
@@ -96,189 +93,19 @@
       color: var(--text);
       background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
     }
-    .nav-toggle {
-      display: none;
-      background: transparent;
-      border: 0;
-      color: var(--text);
-      font-size: 1.35rem;
-      cursor: pointer;
-    }
 
-    /* Hero */
-    .hero {
-      position: relative;
-      padding: 3.25rem 0;
-      min-height: 54vh;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-    }
-    .hero-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(120deg, rgba(0,0,0,0.55), rgba(0,0,0,0.65));
-      pointer-events: none;
-      z-index: 1;
-    }
-    .hero-inner {
-      position: relative;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      z-index: 2;
-    }
-    .hero-text { flex: 1; max-width: 58ch; }
-    .hero h1 {
-      margin: 0 0 .6rem 0;
-      font-size: clamp(1.6rem, 3.6vw, 2.8rem);
-      letter-spacing: -0.5px;
-    }
-    .lead { color: var(--muted); margin: 0 0 1rem 0; }
-    .hero-media img {
-      max-width: 340px;
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-
-    /* Buttons */
-    .btn {
-      display: inline-block;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: #05060a;
-      padding: .6rem 1rem;
-      border-radius: 10px;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .btn.ghost {
-      background: transparent;
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .btn.small { padding: .4rem .6rem; font-size: .95rem; }
-
-    /* Sections/cards */
+    /* Sections */
     .section { padding: 2rem 0 3rem 0; }
     h2 { margin-top: 0; font-size: 1.4rem; color: var(--text); }
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border-radius: var(--card-radius);
-      padding: 1rem;
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .price-big {
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--accent-2);
-      margin: 0.35rem 0 0.25rem 0;
-    }
-    .note {
-      font-size: .95rem;
-      color: var(--muted);
-      margin: 0;
-    }
-    .pricing-box {
-      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding: 1rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.03);
-    }
-    .packages { padding-left: 1rem; margin: 0; }
-    .packages li { margin: 0.45rem 0; }
-    .video-grid .card h4 { margin: 0 0 .4rem 0; }
-
-    /* studio */
-    .studio-features {
-      display: flex;
-      gap: 1rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-    .feature {
-      background: rgba(255,255,255,0.02);
-      padding: .6rem 1rem;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.02);
-    }
-
-    /* shop */
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-    }
-    .product img { width: 100%; height: 170px; object-fit: cover; border-radius: 8px; margin-bottom: .6rem; }
-    .price { font-weight: 800; color: var(--accent-2); }
+    
     .muted { color: var(--muted); }
-
-    /* gallery */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: .6rem;
-      margin-top: 1rem;
+    .muted a {
+      color: var(--accent-2);
+      text-decoration: none;
+      font-weight: bold;
     }
-    .gallery-grid img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03); }
-
-    /* Free Audio Player Styling */
-    .sample-container-box {
-      background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-      border: 1px solid rgba(255, 107, 107, 0.2);
-      border-radius: var(--card-radius);
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
-    .sample-info { flex: 1; }
-    .sample-info h4 { margin: 0 0 0.25rem 0; font-size: 1.1rem; color: var(--text); }
-    .sample-media-wrapper { display: flex; align-items: center; gap: 1rem; width: 100%; max-width: 500px; }
-    .sample-media-wrapper audio { flex: 1; height: 36px; outline: none; }
-
-    /* footer */
-    .site-footer {
-      border-top: 1px solid rgba(255,255,255,0.02);
-      padding: 1rem 0;
-      color: var(--muted);
-      text-align: center;
-      font-size: .95rem;
-    }
-
-    /* responsive */
-    @media (max-width: 900px) {
-      .hero-inner { flex-direction: column-reverse; align-items: flex-start; }
-      .hero-media img { max-width: 100%; }
-    }
-    @media (max-width: 640px) {
-      .nav-toggle { display: block; }
-      .site-nav { 
-        position: absolute; 
-        right: 1.25rem; 
-        top: 64px; 
-        background: linear-gradient(180deg, rgba(8,9,12,0.95), rgba(8,9,12,0.98));
-        padding: .8rem;
-        border-radius: 10px;
-        flex-direction: column;
-        gap: .4rem;
-        display: none;
-        min-width: 160px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-      }
-      .site-nav.open { display: flex; }
-      .site-nav a { padding: .6rem .8rem; }
-      .sample-container-box { flex-direction: column; align-items: stretch; gap: 1rem; }
-      .sample-media-wrapper { max-width: 100%; flex-direction: column; }
-      .sample-media-wrapper audio { width: 100%; }
-      .sample-media-wrapper .btn { width: 100%; text-align: center; }
+    .muted a:hover {
+      text-decoration: underline;
     }
 
     /* Spotify Carousel */
@@ -388,6 +215,16 @@
     }
     .spotify-link:hover { color: var(--accent); }
 
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid rgba(255,255,255,0.02);
+      padding: 1rem 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: .95rem;
+    }
+
+    /* Responsive */
     @media (max-width: 900px) {
       .spotify-track-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
     }
@@ -396,16 +233,6 @@
       .carousel-btn { width: 40px; height: 40px; font-size: 1rem; }
       .spotify-track-container { grid-template-columns: 1fr; }
     }
-
-    /* Service Cards - Uniform Buttons */
-    .service { display: flex; flex-direction: column; }
-    .service-content { flex: 1; }
-    .service-footer {
-      margin-top: auto;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.03);
-    }
-    .service-footer .btn { display: block; text-align: center; width: 100%; }
 
     /* Simple Brick Wallpaper Background */
     body::after {
@@ -432,331 +259,45 @@
       pointer-events: none;
       z-index: 1;
     }
-
-    /* Ad Spaces Styling Framework */
-    .ad-space {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #18181c 0%, #0d0d0f 100%);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      margin: 2rem auto;
-      border-radius: var(--card-radius, 12px);
-      overflow: hidden;
-      position: relative;
-    }
-    .ad-leaderboard {
-      width: 100%;
-      max-width: 728px;
-      height: 90px;
-    }
-    .ad-box {
-      width: 100%;
-      max-width: 300px;
-      height: 250px;
-      margin: 0 auto;
-    }
-    .ad-sample-link {
-      display: flex;
-      width: 100%;
-      height: 100%;
-      text-decoration: none;
-      align-items: center;
-      color: #ffffff;
-      transition: background 0.3s ease;
-    }
-    .ad-sample-link:hover { background: rgba(255, 255, 255, 0.02); }
-    .ad-tag {
-      position: absolute;
-      top: 4px;
-      right: 8px;
-      font-size: 9px;
-      color: rgba(255,255,255,0.3);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .ad-text-content { margin-left: 20px; text-align: left; }
-    .ad-text-content h5 { margin: 0; font-size: 1.1rem; color: #e5e5e5; }
-    .ad-text-content p { margin: 4px 0 0 0; font-size: 0.85rem; color: #a0a0a5; }
   </style>
 </head>
 <body>
+
+  <!-- Navigation Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="#">
-        <img src="images/logo.svg" alt="EXOTIKAP STUDIO RECORDS" class="logo" onerror="this.style.display='none'">
-        <span class="brand-text">EXOTIKAP STUDIO RECORDS</span>
-      </a>
-
-      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
-        ☰
-      </button>
-
-     <nav class="site-nav" aria-label="Main navigation">
-  <a href="index.html" class="active">Home</a>
-  <a href="music.html">Music</a>
-  <a href="studio.html">Studio</a>
-  <a href="shop-and-services.html">Shop and Services</a>
-  <a href="gallery.html">Gallery</a>
-  <a href="contact.html">Contact</a>
-</nav>
+      <div class="logo">EXOTIKAP STUDIO RECORDS</div>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="https://exotikap-studio-records.github.io/" class="active">Home</a>
+        <a href="https://exotikap-studio-records.github.io/music.html">Music</a>
+        <a href="https://exotikap-studio-records.github.io/studio.html">Studio</a>
+        <a href="https://exotikap-studio-records.github.io/shop-and-services.html">Shop and Services</a>
+        <a href="https://exotikap-studio-records.github.io/gallery.html">Gallery</a>
+        <a href="https://exotikap-studio-records.github.io/contact.html">Contact</a>
+      </nav>
     </div>
   </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-overlay"></div>
-      <div class="container hero-inner">
-        <div class="hero-text">
-          <h1>Space where sound & art grows.</h1>
-          <p class="lead">We craft sounds, produce records and create content.</p>
-          <p class="hero-ctas">
-            <a class="btn" href="shop-and-services.html#services">Our Services</a>
-            <a class="btn ghost" href="shop-and-services.html">Shop</a>
-          </p>
-        </div>
-        <div class="hero-media">
-          <img src="images/hero-art.png" alt="Installation preview" />
-        </div>
-      </div>
-    </section>
-
-    <div class="container">
-      <!-- Free Monthly Sample Audio Block -->
-      <div class="sample-container-box">
-        <div class="sample-info">
-          <h4>Free Monthly Samples</h4>
-          <p class="note">Download this month's custom foley & texturised sound assets for your own projects.</p>
-        </div>
-        <div class="sample-media-wrapper">
-          <audio src="https://docs.google.com/uc?export=download&id=YOUR_FILE_ID" controls controlsList="nodownload"></audio>
-          <a class="btn small" href="https://docs.google.com/uc?export=download&id=YOUR_FILE_ID" download="Exotikap_Free_Sample.mp3">Download Sample</a>
-        </div>
-      </div>
-
-      <!-- Advertisement Space -->
-      <div class="ad-space ad-leaderboard">
-        <span class="ad-tag">Sponsored</span>
-        <a href="https://example.com/partner-deal" target="_blank" rel="noopener" class="ad-sample-link">
-          <div class="ad-text-content" style="margin-left: 30px;">
-            <h5>Upgrade Your Sonic Palette: Native Synth VST</h5>
-            <p>Get 20% off cinema-grade ambient textures and analogue modular emulation engines. Use code <strong>EXOTIKAP20</strong>.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <section id="music" class="section container">
+  <main class="container">
+    <section id="music" class="section">
       <h2>Featured Music</h2>
       <p class="muted">Listen to our latest releases and featured tracks on Spotify.</p>
 
       <div class="spotify-carousel-wrapper">
-        <button class="carousel-btn carousel-prev" aria-label="Previous track">❮</button>
+        <button class="carousel-btn carousel-prev" id="prevBtn" aria-label="Previous track">❮</button>
         
         <div class="spotify-carousel">
           <div class="spotify-track-container" id="spotifyContainer">
+            <!-- Dynamic Spotify Cards Load Here -->
           </div>
         </div>
 
-        <button class="carousel-btn carousel-next" aria-label="Next track">❯</button>
+        <button class="carousel-btn carousel-next" id="nextBtn" aria-label="Next track">❯</button>
       </div>
 
       <p class="muted" style="margin-top:1rem;text-align:center">
         Follow us on <a href="https://open.spotify.com/artist/YOUR_ARTIST_ID" target="_blank" rel="noopener">Spotify</a> for new releases
       </p>
-    </section>
-
-    <section id="gallery" class="section container">
-      <h2>Gallery</h2>
-      <p>Selected installations and recent exhibitions.</p>
-      
-      <div class="carousel-wrapper" style="margin-top:1.5rem;">
-        <button class="carousel-btn carousel-prev" aria-label="Previous gallery item">❮</button>
-        
-        <div class="carousel">
-          <div class="carousel-container" id="galleryContainer">
-          </div>
-        </div>
-
-        <button class="carousel-btn carousel-next" aria-label="Next gallery item">❯</button>
-      </div>
-    </section>
-    
-    <section id="shop" class="section container">
-      <div class="shop-external-panel card">
-        <div class="panel-content">
-          <h2>Our Online Shop</h2>
-          <p class="lead">Purchase sound packs, handmade installation art, limited merchandise, and redeemable session tickets directly from our external storefront.</p>
-          <p class="muted">All purchases made on our official external platform are credit-backed and can be seamlessly applied toward your studio bookings or digital downloads.</p>
-        </div>
-        <div class="panel-action">
-          <a class="btn large" href="https://yourshop.example.com" target="_blank" rel="noopener">
-            Visit External Store 
-            <span class="arrow">→</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="section container">
-      <h2>Services & Pricing</h2>
-      <p class="muted">Transparent pricing and package options. All rates are listed in USD.
-        <span style="display:inline-block;margin-left:1rem;">
-          <a class="btn small" href="mailto:exotikapstudio@gmail.com,jsoundmtl@gmail.com?subject=Booking" target="_blank" rel="noopener">Book</a>
-          <a class="btn small ghost" href="#shop" style="margin-left:.5rem;">Shop</a>
-        </span>
-      </p>
-
-      <div class="grid services-grid" style="grid-template-columns: repeat(4, 1fr); margin-top:1.5rem;">
-        <article class="card service">
-          <div class="service-content">
-            <h3>Recording</h3>
-            <p>Professional tracking with analog and digital signal chains. Engineer included.</p>
-            <p class="price-big">$50 / hour</p>
-            <p class="note">Minimum 4 hours (4 × $50 = $200 minimum session)</p>
-          </div>
-        </article>
-      
-        <article class="card service">
-          <div class="service-content">
-            <h3>Mixing</h3>
-            <p>Focused mixing service with revision round. Delivered stereo .wav & .mp3 or stems.</p>
-            <p class="price-big">$75 / mix</p>
-          </div>
-        </article>
-      
-        <article class="card service">
-          <div class="service-content">
-            <h3>Mastering</h3>
-            <p>Mastering for release, loudness targets and format delivery (radio/ streaming/ video).</p>
-            <p class="price-big">$75 / master</p>
-          </div>
-        </article>
-      
-        <article class="card service">
-          <div class="service-content">
-            <h3>Beat & Fixed Media Production</h3>
-            <p>Production of beats and fixed-media pieces for releases and installations. Delivered as .wav & .mp3</p>
-            <p class="price-big">$125 / file</p>
-          </div>
-        </article>
-      </div>
-
-      <h3 style="margin-top:2rem;">Packages & Combination Deals</h3>
-      <p class="muted">Choose a package — Book for direct contact or Buy a redeemable ticket from the shop.</p>
-
-      <div class="grid services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
-        <article class="card service">
-          <div class="service-content">
-            <h4>Mixing + Mastering</h4>
-            <p class="price-big">$150</p>
-            <p>Professional mixing with one comprehensive revision round, plus full mastering for streaming, radio, and video formats. Delivered in multiple formats: .WAV (24-bit, 48kHz), .MP3 (320kbps), and stem files for future flexibility. Our engineers will work with you to ensure your mix translates perfectly across all playback systems before final delivery.</p>
-          </div>
-        </article>
-
-        <article class="card service">
-          <div class="service-content">
-            <h4>Recording + Mixing + Mastering</h4>
-            <p class="price-big">$300</p>
-            <p>Our flagship complete production package: professional tracking with engineer included, comprehensive mixing with unlimited revision rounds, and mastering for all platforms. Receive your finished product in all formats: .WAV, .MP3, stems, and ready-to-upload files for streaming services. Perfect for singles, EPs, or full album projects. Includes room for creative adjustments throughout every stage.</p>
-          </div>
-        </article>
-      </div>
-
-     <!-- New Section: Social Media Marketing & Promotion Services -->
-     <h3 style="margin-top:2rem;">Music Marketing & Content Promotion</h3>
-     <p class="muted">Boost your music, beats, and sound kits with targeted cross-platform promotion.</p>
-
-     <div class="grid services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
-       <article class="card service">
-         <div class="service-content">
-           <h4>Music Campaign Track</h4>
-           <p class="price-big">$85 / release</p>
-           <p>Targeted promo push for singles or sound packs. Includes optimized short-form audio formatting for video reels/shorts, custom platform metadata indexing, and an algorithm-tuned hashtag rollout strategy.</p>
-         </div>
-       </article>
-
-       <article class="card service">
-         <div class="service-content">
-           <h4>Content & Marketing Bundle</h4>
-           <p class="price-big">$220</p>
-           <p>Complete campaign rollout. Combines music-to-video synchronization (TikTok/Reels editing assets) with a digital press kit. Includes full distribution optimization and ready-to-post content grids.</p>
-         </div>
-       </article>
-     </div>
-     
-      <h3 style="margin-top:2rem;">Video Reel Services</h3>
-      <p class="muted">Short-form and edited video packages for promos, reels, and documentation.</p>
-
-      <div class="grid services-grid" style="grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
-        <article class="card service">
-          <div class="service-content">
-            <h4>30‑second Reel</h4>
-            <p class="price-big">$50</p>
-            <p>Quick, punchy highlight reel or teaser cut perfect for social media. Includes basic color correction, transitions, and one revision round. Delivered as high-quality MP4 optimized for Instagram Reels, TikTok, and YouTube Shorts. Ideal for quick turnaround.</p>
-          </div>
-        </article>
-
-        <article class="card service">
-          <div class="service-content">
-            <h4>Editing Only</h4>
-            <p class="price-big">$75</p>
-            <p>Bring us your raw footage and we'll transform it into polished, professional content. Full post-production includes color grading, sound design, transitions, and effects integration. One comprehensive revision round included. Delivered in multiple formats optimized for all platforms.</p>
-          </div>
-        </article>
-
-        <article class="card service">
-          <div class="service-content">
-            <h4>2m30s + Editing</h4>
-            <p class="price-big">$250</p>
-            <p>Comprehensive video production: studio documentation, live session captures, music video, or cinematic content. Includes professional shot selection, broadcast-quality color grading, sound design integration, and unlimited revisions until perfect. Delivered in all formats.</p>
-          </div>
-        </article>
-      </div>
-
-      <h3 style="margin-top:2rem;">Sound Design Assets</h3>
-      <p class="muted">Single sound purchases or packs for producers and installations. Tickets/credits are redeemable.</p>
-
-      <div class="grid services-grid" style="grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top:.6rem;">
-        <article class="card service">
-          <div class="service-content">
-            <h4>Single Sound Asset</h4>
-            <p class="price-big">$5</p>
-            <p>Access a single, meticulously crafted high-fidelity sonic asset. Delivered as an uncompressed WAV file (24-bit/48kHz), ideal for game design, app triggers, unique production accents, or contemporary art installations. Fully licensed for commercial and royalty-free use in your project scope.</p>
-          </div>
-        </article>
-
-        <article class="card service">
-          <div class="service-content">
-            <h4>Pack of 30 Sounds</h4>
-            <p class="price-big">$120</p>
-            <p>A comprehensive collection of 30 professionally curated audio assets. This discounted custom bundle features cohesive textures, ambient beds, synthetic hits, and specialized foley designed for audio producers, filmmakers, and installation installations. Includes standard formatting packages and multi-format metadata tagging.</p>
-          </div>
-        </article>
-      </div>
-      <p class="muted" style="margin-top:1rem">Note: Sound design purchases are ticket/credit-based and can be redeemed for sessions or downloads as specified on checkout.</p>
-    </section>
-
-    <div class="container" style="margin-top: 3rem;">
-      <div class="ad-space ad-box" style="flex-direction: column; text-align: center; padding: 20px;">
-        <span class="ad-tag">Ads by Google</span>
-        <div style="opacity: 0.3; margin-bottom: 15px;">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"></rect>
-            <line x1="7" y1="2" x2="7" y2="22"></line>
-            <line x1="17" y1="2" x2="17" y2="22"></line>
-            <line x1="2" y1="12" x2="22" y2="12"></line>
-          </svg>
-        </div>
-        <p style="font-size: 0.8rem; color: #a0a0a5; margin: 0 0 10px 0;">Contextual dynamic ad automatically tailored to your visitor's audio hardware interests.</p>
-        <span style="font-size: 0.75rem; color: #3b82f6; text-decoration: underline; cursor:pointer;">Learn More</span>
-      </div>
-    </div>
-
-    <section id="contact" class="section container">
-      <h2>Contact</h2>
-      <p>For bookings, commissions, or shop orders: <a href="mailto:exotikapstudio@gmail.com">exotikapstudio@gmail.com</a> · <a href="mailto:jsoundmtl@gmail.com">jsoundmtl@gmail.com</a></p>
-      <p>Social: <a href="#" target="_blank">Instagram</a> · <a href="#" target="_blank">Bandcamp</a> · <a href="#" target="_blank">LinkedIn</a></p>
     </section>
   </main>
 
@@ -766,22 +307,12 @@
     </div>
   </footer>
 
+  <!-- Carousel JavaScript Logic -->
   <script>
-    // 1. Set current year automatically
+    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // 2. Mobile navigation toggle
-    const btn = document.querySelector('.nav-toggle');
-    const nav = document.querySelector('.site-nav');
-    if (btn && nav) {
-      btn.addEventListener('click', () => {
-        const expanded = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', String(!expanded));
-        nav.classList.toggle('open');
-      });
-    }
-
-    // ============ SPOTIFY CAROUSEL ============
+    // Spotify Tracks Data
     const spotifyTracks = [
       {
         id: 1,
@@ -809,22 +340,13 @@
       }
     ];
 
+    const container = document.getElementById("spotifyContainer");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
     let spotifyIndex = 0;
-    const spotifyContainer = document.getElementById('spotifyContainer');
 
-    function renderSpotifyCarousel() {
-      if (!spotifyContainer) return;
-      spotifyContainer.innerHTML = '';
-      
-      const visibleTracks = Math.min(3, spotifyTracks.length);
-      for (let i = 0; i < visibleTracks; i++) {
-        const trackIndex = (spotifyIndex + i) % spotifyTracks.length;
-        const track = spotifyTracks[trackIndex];
-        const trackEl = createSpotifyCard(track);
-        spotifyContainer.appendChild(trackEl);
-      }
-    }
-
+    // Create Spotify Card Elements
     function createSpotifyCard(track) {
       const card = document.createElement('div');
       card.className = 'spotify-card';
@@ -847,62 +369,31 @@
       return card;
     }
 
-    document.querySelector('#music .carousel-prev')?.addEventListener('click', () => {
+    // Render Carousel
+    function renderSpotifyCarousel() {
+      container.innerHTML = '';
+      const visibleTracks = Math.min(3, spotifyTracks.length);
+      for (let i = 0; i < visibleTracks; i++) {
+        const trackIndex = (spotifyIndex + i) % spotifyTracks.length;
+        const track = spotifyTracks[trackIndex];
+        const trackEl = createSpotifyCard(track);
+        container.appendChild(trackEl);
+      }
+    }
+
+    // Navigation Controls
+    prevBtn.addEventListener("click", () => {
       spotifyIndex = (spotifyIndex - 1 + spotifyTracks.length) % spotifyTracks.length;
       renderSpotifyCarousel();
     });
 
-    document.querySelector('#music .carousel-next')?.addEventListener('click', () => {
+    nextBtn.addEventListener("click", () => {
       spotifyIndex = (spotifyIndex + 1) % spotifyTracks.length;
       renderSpotifyCarousel();
     });
 
+    // Initialize
     renderSpotifyCarousel();
-
-    // ============ GALLERY VIDEO CAROUSEL ============
-    const galleryItems = [
-      { id: 1, title: "Installation 1", type: "video", src: "images/gallery1.mp4" },
-      { id: 2, title: "Installation 2", type: "video", src: "images/gallery2.mp4" },
-      { id: 3, title: "Installation 3", type: "video", src: "images/gallery3.mp4" },
-      { id: 4, title: "Installation 4", type: "image", src: "images/gallery4.jpg" }
-    ];
-
-    let galleryIndex = 0;
-    const galleryContainer = document.getElementById('galleryContainer');
-
-    function renderGalleryCarousel() {
-      if (!galleryContainer) return;
-      galleryContainer.innerHTML = '';
-      const item = galleryItems[galleryIndex];
-      
-      if (item.type === 'video') {
-        const video = document.createElement('video');
-        video.src = item.src;
-        video.controls = true;
-        video.style.width = '100%';
-        video.style.borderRadius = 'var(--card-radius, 12px)';
-        galleryContainer.appendChild(video);
-      } else {
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.title;
-        img.style.width = '100%';
-        img.style.borderRadius = 'var(--card-radius, 12px)';
-        galleryContainer.appendChild(img);
-      }
-    }
-
-    document.querySelector('#gallery .carousel-prev')?.addEventListener('click', () => {
-      galleryIndex = (galleryIndex - 1 + galleryItems.length) % galleryItems.length;
-      renderGalleryCarousel();
-    });
-
-    document.querySelector('#gallery .carousel-next')?.addEventListener('click', () => {
-      galleryIndex = (galleryIndex + 1) % galleryItems.length;
-      renderGalleryCarousel();
-    });
-
-    renderGalleryCarousel();
   </script>
 </body>
 </html>
