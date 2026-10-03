@@ -6,90 +6,274 @@
   <title>Music & Releases | Exotikap Studio Records</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Carousel Layout Styling */
+    :root {
+      --bg-img: url('images/bg-abstract.jpg');
+      --panel:#0f1724;
+      --muted:#a8b6c6;
+      --text:#eef6fb;
+      --accent:#ff6b6b;
+      --accent-2:#7ee8d5;
+      --card-radius:12px;
+      --container-max:1100px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: dark;
+      font-size:16px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(3,6,10,0.75), rgba(3,6,10,0.85)),
+        var(--bg-img);
+      background-size: cover;
+      background-position: center center;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.45;
+      min-height: 100vh;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.45));
+      pointer-events: none;
+      z-index: 0;
+    }
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 1.25rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: linear-gradient(180deg, rgba(3,6,10,0.45), rgba(3,6,10,0.25));
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .header-inner {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    /* Nav */
+    .site-nav {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .site-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: .45rem .6rem;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+    .site-nav a:hover,
+    .site-nav a.active {
+      color: var(--text);
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    }
+
+    /* Sections */
+    .section { padding: 2rem 0 3rem 0; }
+    h2 { margin-top: 0; font-size: 1.4rem; color: var(--text); }
+    
+    .muted { color: var(--muted); }
+    .muted a {
+      color: var(--accent-2);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .muted a:hover {
+      text-decoration: underline;
+    }
+
+    /* Spotify Carousel */
     .spotify-carousel-wrapper {
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin: 2rem 0;
       gap: 1rem;
+      margin-top: 1.5rem;
     }
-
-    .spotify-carousel {
-      width: 100%;
-      max-width: 600px;
-      overflow: hidden;
-      border-radius: 12px;
-      background: #181818;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-    }
-
-    .spotify-track-container {
-      display: flex;
-      transition: transform 0.4s ease-in-out;
-      width: 100%;
-    }
-
-    .spotify-slide {
-      min-width: 100%;
-      box-sizing: border-box;
-      display: flex;
-      justify-content: center;
-    }
-
-    .spotify-slide iframe {
-      border: 0;
-      width: 100%;
-      height: 352px;
-      border-radius: 12px;
-    }
-
-    /* Navigation Buttons */
     .carousel-btn {
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      font-size: 1.5rem;
-      padding: 0.8rem 1.2rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: #05060a;
+      border: none;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
+      font-size: 1.2rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s ease;
-      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-
     .carousel-btn:hover {
-      background: #ff007f;
-      border-color: #ff007f;
       transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
     }
-
-    .muted {
-      color: #aaaaaa;
+    .carousel-prev,
+    .carousel-next {
+      z-index: 10;
     }
-
-    .muted a {
-      color: #1db954; /* Spotify Green */
+    .spotify-carousel {
+      flex: 1;
+      overflow: hidden;
+    }
+    .spotify-track-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      animation: slideIn 0.3s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0.7; }
+      to { opacity: 1; }
+    }
+    .spotify-card {
+      background: linear-gradient(135deg, rgba(29, 185, 84, 0.1), rgba(191, 90, 242, 0.1));
+      border: 1px solid rgba(29, 185, 84, 0.3);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    .spotify-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 24px rgba(29, 185, 84, 0.25);
+      border-color: rgba(29, 185, 84, 0.6);
+    }
+    .spotify-card-image {
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.3);
+    }
+    .spotify-card-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .spotify-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      background: rgba(29, 185, 84, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
       text-decoration: none;
-      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.3s ease, background 0.3s ease;
+      z-index: 5;
+    }
+    .spotify-card:hover .spotify-play-btn { opacity: 1; }
+    .spotify-play-btn:hover { background: rgba(29, 185, 84, 1); }
+    .spotify-card-info { padding: 1rem; }
+    .spotify-card-info h4 { margin: 0 0 0.4rem 0; font-size: 1rem; color: var(--text); }
+    .spotify-card-info .artist { margin: 0 0 0.2rem 0; font-size: 0.9rem; color: var(--accent-2); font-weight: 600; }
+    .spotify-card-info .album { margin: 0 0 0.6rem 0; font-size: 0.85rem; color: var(--muted); }
+    .spotify-link {
+      display: inline-block;
+      color: var(--accent-2);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.2s ease;
+    }
+    .spotify-link:hover { color: var(--accent); }
+
+    /* Footer */
+    .site-footer {
+      border-top: 1px solid rgba(255,255,255,0.02);
+      padding: 1rem 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: .95rem;
     }
 
-    .muted a:hover {
-      text-decoration: underline;
+    /* Responsive */
+    @media (max-width: 900px) {
+      .spotify-track-container { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    }
+    @media (max-width: 640px) {
+      .spotify-carousel-wrapper { gap: 0.75rem; }
+      .carousel-btn { width: 40px; height: 40px; font-size: 1rem; }
+      .spotify-track-container { grid-template-columns: 1fr; }
+    }
+
+    /* Simple Brick Wallpaper Background */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: 
+        repeating-linear-gradient(90deg, 
+          transparent 0, 
+          transparent calc(50% - 1px), 
+          rgba(255, 100, 255, 0.15) calc(50% - 1px), 
+          rgba(255, 100, 255, 0.15) 50%,
+          transparent 50%, 
+          transparent 100%
+        ),
+        repeating-linear-gradient(0deg, 
+          transparent 0, 
+          transparent 59px, 
+          rgba(0, 255, 200, 0.12) 59px, 
+          rgba(0, 255, 200, 0.12) 60px
+        );
+      background-size: 100px 60px;
+      background-position: 0 0, 50px 0;
+      pointer-events: none;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
 
   <!-- Navigation Header -->
-  <header>
-    <div class="logo">EXOTIKAP STUDIO RECORDS</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="music.html" class="active">Music</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">EXOTIKAP STUDIO RECORDS</div>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <a href="music.html" class="active">Music</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main class="container">
@@ -102,7 +286,7 @@
         
         <div class="spotify-carousel">
           <div class="spotify-track-container" id="spotifyContainer">
-            <!-- Dynamic Spotify Embeds Load Here -->
+            <!-- Dynamic Spotify Cards Load Here -->
           </div>
         </div>
 
@@ -115,51 +299,99 @@
     </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="container">
+      <p>© <span id="year"></span> EXOTIKAP STUDIO RECORDS — Built with sound & art</p>
+    </div>
+  </footer>
+
   <!-- Carousel JavaScript Logic -->
   <script>
-    // 1. Replace these Spotify Track or Album IDs with your actual IDs
-    const spotifyTrackIDs = [
-      "4cOdK2wGLETKBW3PvgPWqT", // Replace with Track/Album ID 1
-      "3n3Pp3eLJR3bA3C3A3C3A3", // Replace with Track/Album ID 2
-      "1234567890abcdefghijkl"  // Replace with Track/Album ID 3
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Spotify Tracks Data
+    const spotifyTracks = [
+      {
+        id: 1,
+        title: "Bust it Down",
+        artist: "Ju-Dk",
+        album: "Album Name",
+        image: "images/album-art-1.jpg",
+        spotifyUrl: "https://open.spotify.com/track/5UJPU1ag782skNnEd1YmDi"
+      },
+      {
+        id: 2,
+        title: "Track Title 2",
+        artist: "Your Artist Name",
+        album: "Album Name",
+        image: "images/album-art-2.jpg",
+        spotifyUrl: "https://open.spotify.com/track/example2"
+      },
+      {
+        id: 3,
+        title: "Track Title 3",
+        artist: "Your Artist Name",
+        album: "Album Name",
+        image: "images/album-art-3.jpg",
+        spotifyUrl: "https://open.spotify.com/track/example3"
+      }
     ];
 
     const container = document.getElementById("spotifyContainer");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
 
-    let currentIndex = 0;
+    let spotifyIndex = 0;
 
-    // 2. Render Embeds Dynamically
-    function renderTracks() {
-      container.innerHTML = spotifyTrackIDs.map(id => `
-        <div class="spotify-slide">
-          <iframe 
-            src="https://open.spotify.com/embed/track/${id}?utm_source=generator&theme=0" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy">
-          </iframe>
+    // Create Spotify Card Elements
+    function createSpotifyCard(track) {
+      const card = document.createElement('div');
+      card.className = 'spotify-card';
+      card.innerHTML = `
+        <div class="spotify-card-image">
+          <img src="${track.image}" alt="${track.title}" />
+          <a href="${track.spotifyUrl}" target="_blank" rel="noopener" class="spotify-play-btn" aria-label="Play on Spotify">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </a>
         </div>
-      `).join("");
+        <div class="spotify-card-info">
+          <h4>${track.title}</h4>
+          <p class="artist">${track.artist}</p>
+          <p class="album">${track.album}</p>
+          <a href="${track.spotifyUrl}" target="_blank" rel="noopener" class="spotify-link">Listen on Spotify →</a>
+        </div>
+      `;
+      return card;
     }
 
-    // 3. Carousel Navigation Controls
-    function updateCarousel() {
-      container.style.transform = `translateX(-${currentIndex * 100}%)`;
+    // Render Carousel
+    function renderSpotifyCarousel() {
+      container.innerHTML = '';
+      const visibleTracks = Math.min(3, spotifyTracks.length);
+      for (let i = 0; i < visibleTracks; i++) {
+        const trackIndex = (spotifyIndex + i) % spotifyTracks.length;
+        const track = spotifyTracks[trackIndex];
+        const trackEl = createSpotifyCard(track);
+        container.appendChild(trackEl);
+      }
     }
 
-    nextBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex + 1) % spotifyTrackIDs.length;
-      updateCarousel();
+    // Navigation Controls
+    prevBtn.addEventListener("click", () => {
+      spotifyIndex = (spotifyIndex - 1 + spotifyTracks.length) % spotifyTracks.length;
+      renderSpotifyCarousel();
     });
 
-    prevBtn.addEventListener("click", () => {
-      currentIndex = (currentIndex - 1 + spotifyTrackIDs.length) % spotifyTrackIDs.length;
-      updateCarousel();
+    nextBtn.addEventListener("click", () => {
+      spotifyIndex = (spotifyIndex + 1) % spotifyTracks.length;
+      renderSpotifyCarousel();
     });
 
     // Initialize
-    renderTracks();
+    renderSpotifyCarousel();
   </script>
 </body>
 </html>
