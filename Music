@@ -1,1 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music & Releases | Exotikap Studio Records</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Carousel Layout Styling */
+    .spotify-carousel-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0;
+      gap: 1rem;
+    }
 
+    .spotify-carousel {
+      width: 100%;
+      max-width: 600px;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #181818;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .spotify-track-container {
+      display: flex;
+      transition: transform 0.4s ease-in-out;
+      width: 100%;
+    }
+
+    .spotify-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+    }
+
+    .spotify-slide iframe {
+      border: 0;
+      width: 100%;
+      height: 352px;
+      border-radius: 12px;
+    }
+
+    /* Navigation Buttons */
+    .carousel-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 1.5rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .carousel-btn:hover {
+      background: #ff007f;
+      border-color: #ff007f;
+      transform: scale(1.1);
+    }
+
+    .muted {
+      color: #aaaaaa;
+    }
+
+    .muted a {
+      color: #1db954; /* Spotify Green */
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .muted a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header>
+    <div class="logo">EXOTIKAP STUDIO RECORDS</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="music.html" class="active">Music</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="music" class="section">
+      <h2>Featured Music</h2>
+      <p class="muted">Listen to our latest releases and featured tracks on Spotify.</p>
+
+      <div class="spotify-carousel-wrapper">
+        <button class="carousel-btn carousel-prev" id="prevBtn" aria-label="Previous track">❮</button>
+        
+        <div class="spotify-carousel">
+          <div class="spotify-track-container" id="spotifyContainer">
+            <!-- Dynamic Spotify Embeds Load Here -->
+          </div>
+        </div>
+
+        <button class="carousel-btn carousel-next" id="nextBtn" aria-label="Next track">❯</button>
+      </div>
+
+      <p class="muted" style="margin-top:1rem;text-align:center">
+        Follow us on <a href="https://open.spotify.com/artist/YOUR_ARTIST_ID" target="_blank" rel="noopener">Spotify</a> for new releases
+      </p>
+    </section>
+  </main>
+
+  <!-- Carousel JavaScript Logic -->
+  <script>
+    // 1. Replace these Spotify Track or Album IDs with your actual IDs
+    const spotifyTrackIDs = [
+      "4cOdK2wGLETKBW3PvgPWqT", // Replace with Track/Album ID 1
+      "3n3Pp3eLJR3bA3C3A3C3A3", // Replace with Track/Album ID 2
+      "1234567890abcdefghijkl"  // Replace with Track/Album ID 3
+    ];
+
+    const container = document.getElementById("spotifyContainer");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+
+    let currentIndex = 0;
+
+    // 2. Render Embeds Dynamically
+    function renderTracks() {
+      container.innerHTML = spotifyTrackIDs.map(id => `
+        <div class="spotify-slide">
+          <iframe 
+            src="https://open.spotify.com/embed/track/${id}?utm_source=generator&theme=0" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy">
+          </iframe>
+        </div>
+      `).join("");
+    }
+
+    // 3. Carousel Navigation Controls
+    function updateCarousel() {
+      container.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % spotifyTrackIDs.length;
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + spotifyTrackIDs.length) % spotifyTrackIDs.length;
+      updateCarousel();
+    });
+
+    // Initialize
+    renderTracks();
+  </script>
+</body>
+</html>
